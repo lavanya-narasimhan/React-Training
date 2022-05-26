@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 
-export default function TableEdit({ row, data, editId, setEditId }) {
-  const { register } = useForm();
+export default function TableEdit({ row, data, setEditId, editItem }) {
+  const [editedText] = useState("");
   const handleCancelClick = () => {
     setEditId(0);
   };
@@ -13,16 +13,19 @@ export default function TableEdit({ row, data, editId, setEditId }) {
         <input
           type="text"
           required="required"
-          placeholder="Enter a To-Do Item"
+          defaultValue={row.original.value.inputField}
           name="editedText"
-          {...register("editedText", { required: true })}
-        ></input>
+          id="editedText"
+        />
       </td>
       <td>
         <button
           className="btn btn-primary"
           style={{ marginRight: "20px" }}
-          type="submit"
+          onClick={() => {
+            setEditId(0);
+            editItem(row.original, editedText);
+          }}
         >
           Save
         </button>

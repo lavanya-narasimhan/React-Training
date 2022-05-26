@@ -11,11 +11,6 @@ export default function AddToDo({ addItem }) {
   const onSubmit = useCallback(
     (data) => {
       addItem(data);
-      const color = document.getElementById("button").style.backgroundColor;
-      document.getElementById("button").style.backgroundColor = "green";
-      setTimeout(() => {
-        document.getElementById("button").style.backgroundColor = color;
-      }, 1000);
       document.getElementById("inputField").value = "";
       document.getElementById("button").innerText = "Add another!";
     },

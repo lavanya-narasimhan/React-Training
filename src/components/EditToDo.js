@@ -1,8 +1,7 @@
-import { Fragment, useMemo } from "react";
 import { Link } from "react-router-dom";
 import TableView from "./TableView";
 
-export default function EditToDo({ items, editItem }) {
+export default function EditToDo({ items, editItem, deleteItem }) {
   return (
     <div className="container">
       <main
@@ -14,10 +13,10 @@ export default function EditToDo({ items, editItem }) {
           fontWeight: "bold",
         }}
       >
-        <h2>Edit ToDo Items</h2>
+        <h2>Edit/Delete Items</h2>
       </main>
 
-      <TableView items={items} editItem={editItem} />
+      <TableView items={items} editItem={editItem} deleteItem={deleteItem} />
       <nav>
         <Link to="/" className="btn btn-primary">
           Home

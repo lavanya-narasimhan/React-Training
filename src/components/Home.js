@@ -1,9 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
-export default function Home({ items }) {
+export default function Home({ items, toggleComplete }) {
   const data = useMemo(() => items, [items]);
+
   const columns = useMemo(
     () => [
       {
@@ -14,6 +15,8 @@ export default function Home({ items }) {
             type="checkbox"
             className="form-check-input"
             id="original.id"
+            onChange={() => toggleComplete(original.id)}
+            checked={original.completed}
           />
         ),
       },
@@ -23,7 +26,7 @@ export default function Home({ items }) {
         accessor: "value.inputField",
       },
     ],
-    []
+    [toggleComplete]
   );
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
