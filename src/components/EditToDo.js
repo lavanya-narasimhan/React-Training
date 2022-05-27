@@ -18,7 +18,7 @@ export default function EditToDo({ items, editItem, deleteItem }) {
 
       <TableView items={items} editItem={editItem} deleteItem={deleteItem} />
       <nav>
-        <Link to="/" className="btn btn-primary">
+        <Link id="HomeButton" to="/" className="btn btn-primary">
           Home
         </Link>
       </nav>

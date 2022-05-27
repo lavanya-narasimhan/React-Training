@@ -29,6 +29,7 @@ export default function TableView({ items, editItem, deleteItem }) {
         Cell: ({ row: { original } }) => (
           <Fragment>
             <button
+              id="editButton"
               className="btn btn-primary"
               style={{ marginRight: "20px" }}
               onClick={() => {
@@ -38,6 +39,7 @@ export default function TableView({ items, editItem, deleteItem }) {
               Edit
             </button>
             <button
+              id="deleteButton"
               className="btn btn-primary"
               onClick={() => {
                 deleteItem(original.id);
@@ -55,7 +57,7 @@ export default function TableView({ items, editItem, deleteItem }) {
     useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} className="table table-striped">
+    <table id="TableView" {...getTableProps()} className="table table-striped">
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>

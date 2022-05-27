@@ -45,7 +45,11 @@ export default function Home({ items, toggleComplete }) {
         >
           <h2>Welcome to the To-Do List Page!</h2>
         </main>
-        <table {...getTableProps()} className="table table-striped">
+        <table
+          {...getTableProps()}
+          id="HomeTable"
+          className="table table-striped"
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>

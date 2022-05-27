@@ -20,6 +20,7 @@ export default function TableEdit({ row, data, setEditId, editItem }) {
       </td>
       <td>
         <button
+          id="SaveButton"
           className="btn btn-primary"
           style={{ marginRight: "20px" }}
           onClick={() => {
