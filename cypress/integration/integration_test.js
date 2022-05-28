@@ -3,24 +3,35 @@ describe("Integration Test", () => {
     cy.visit("http://localhost:3000/");
   });
 
+  const addItems = [
+    "Buy groceries",
+    "Complete tutorial",
+    "Do laundry",
+    "Read a book",
+    "Do Yoga",
+  ];
+  const editedArr = [
+    "Buy groceries",
+    "Do laundry",
+    "Read a book",
+    "Finish assignment",
+  ];
+
   it("Adds Items", () => {
     cy.contains("Add To Do Item").click();
     cy.url().should("include", "/add");
-    cy.get("#inputField").type("Buy groceries");
-    cy.get("#button").click();
-    cy.get("#inputField").type("Complete tutorial");
-    cy.get("#button").click();
-    cy.get("#inputField").type("Do laundry");
-    cy.get("#button").click();
-    cy.get("#inputField").type("Read a book");
-    cy.get("#button").click();
-    cy.get("#inputField").type("Do Yoga");
-    cy.get("#button").click();
+    addItems.map((item) => {
+      cy.get("#inputField").type(item);
+      cy.get("#button").click();
+    });
     cy.contains("Home").click();
   });
 
   it("Checks if all items are added", () => {
     cy.get("#HomeTable").find("tr").should("have.length", 6);
+    addItems.map((item) => {
+      cy.should("contain", item);
+    });
   });
 
   it("Deletes an item", () => {
@@ -42,9 +53,19 @@ describe("Integration Test", () => {
 
   it("Checks if item was edited", () => {
     cy.contains("td", "4").siblings().should("contain", "Finish assignment");
-  }),
-    it("Checks if item was deleted", () => {
-      cy.get("#HomeButton").click();
-      cy.get("#HomeTable").find("tr").should("have.length", 5);
+    editedArr.map((item) => {
+      cy.get("#TableView").should("contain", item);
     });
+  });
+  it("Checks if item was deleted", () => {
+    cy.get("#HomeButton").click();
+    cy.get("#HomeTable").find("tr").should("have.length", 5);
+  });
+
+  it("Checks if items remain checked after changing page", () => {
+    cy.get("#checkedInput").check();
+    cy.contains("Add To Do Item").click();
+    cy.contains("Home").click();
+    cy.get("#checkedInput").should("be.checked");
+  });
 });

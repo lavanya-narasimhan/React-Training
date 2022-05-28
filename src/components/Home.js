@@ -14,7 +14,7 @@ export default function Home({ items, toggleComplete }) {
           <input
             type="checkbox"
             className="form-check-input"
-            id="original.id"
+            id="checkedInput"
             onChange={() => toggleComplete(original.id)}
             checked={original.completed}
           />
